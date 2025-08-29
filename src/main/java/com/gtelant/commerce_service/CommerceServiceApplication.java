@@ -9,5 +9,5 @@ public class CommerceServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CommerceServiceApplication.class, args);
 	}
-
+//1
 }
