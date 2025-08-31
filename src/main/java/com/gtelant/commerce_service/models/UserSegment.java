@@ -17,13 +17,17 @@ public class UserSegment {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "segment_id")
     private Segment segment;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "delete_at")
-    private LocalDateTime deleteAt;
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
 }

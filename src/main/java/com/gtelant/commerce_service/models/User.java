@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -56,5 +57,8 @@ public class User {
 
     @Column(name = "delete_at")
     private LocalDateTime deleteAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserSegment> userSegments;
 
 }

@@ -24,8 +24,8 @@ public class Segment {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "delete_at")
-    private LocalDateTime deleteAt;
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "segment")
     private List<UserSegment> userSegments;
