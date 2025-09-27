@@ -1,11 +1,13 @@
 package com.gtelant.commerce_service.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class User {
     private String email;
 
     @Column(name = "birthday")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
     @Column(name = "address")
     private String address;
@@ -37,28 +39,37 @@ public class User {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "state")
-    private String state;
-
     @Column(name = "zipcode")
     private String zipcode;
 
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "has_newsletter")
-    private String hasNewsLetter;
+    private boolean hasNewsletter;
 
-    @Column(name = "last_login time")
-    private LocalDateTime lastLoginTime;
+    @Column(name = "last_seen_at")
+    private LocalDateTime lastSeenAt;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "delete_at")
-    private LocalDateTime deleteAt;
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonManagedReference
     private List<UserSegment> userSegments;
-
 }
+// 登入時...
+// FetchType.LAZY
+// select email, password, role from users where email= '';
+// w/out FetchType.LAZY
+// select * from user
+// inner join user_segments on users.id = user_segments.user_id
+// inner_join  segments on segments.id = user_segments.segment_id
+// where email= ''
